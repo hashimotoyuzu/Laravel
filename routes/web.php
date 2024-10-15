@@ -21,8 +21,10 @@ Route::controller(NewsController::class)->prefix('admin')->group(function() {
     Route::get('news/create', 'add');
 });
 Route::controller(AAAController::class)->prefix('XXX')->group(function() {
-    Route::get('news/create', 'bbb');
+    Route::get('XXX', 'bbb');
 });
+use App\Http\Controllers\Admin\ProfileController;
 Route::controller(ProfileController::class)->prefix('admin')->group(function() {
-    Route::get('profile/create', 'edit');
+    Route::get('profile/create', 'add');
+    Route::get('profile/edit', 'edit');
 });
