@@ -19,18 +19,9 @@ public function create(Request $request)
 
             $profile = new Profile;
             $form = $request->all();
-    
-            if (isset($form['image'])) {
-                $path = $request->file('image')->store('public/image');
-                $profile->image_path = basename($path);
-            } else {
-                $profile->image_path = null;
-            }
-    
+            
             // フォームから送信されてきた_tokenを削除する
             unset($form['_token']);
-            // フォームから送信されてきたimageを削除する
-            unset($form['image']);
     
             // データベースに保存する
             $profile->fill($form);
