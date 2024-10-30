@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Profile;
+use App\Models\ProfileHistory;
+use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
@@ -47,6 +49,23 @@ public function update(Request $request)
 
     $profile->fill($profile_form)->save();
 
-    return redirect('admin/profile/edit');
+    $history = new ProfileHistory();
+    $history->profile_id = $profile->id;
+    $history->edited_at = Carbon::now();
+    $history->save();
+
+    return redirect('admin/profile/edit?id=' . $profile->id);
 }
+public function index(Request $request)
+    {
+        $cond_title = $request->cond_title;
+        if ($cond_title != null) {
+            
+            $posts = Profile::where('title', $cond_title)->get();
+        } else {
+            
+            $posts = Profile::all();
+        }
+        return view('admin.profile.index', ['posts' => $posts, 'cond_title' => $cond_title]);
+    }
 }
