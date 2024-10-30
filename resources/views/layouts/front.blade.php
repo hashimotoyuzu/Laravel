@@ -11,7 +11,7 @@
         <link href="https://fonts.googleapis.com/css?
         family=Raleway:300,400,600" rel="stylesheet" type="text/css">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/front.css') }}" rel="stylesheet">
     </head>
     <body>
         <div id="app">
@@ -27,9 +27,11 @@
                         <ul class="navbar-nav ms-auto">
                         </ul>
                         <ul class="navbar-nav">
-                              <!-- Authentication Links -->
+                            <!-- Authentication Links -->
+                            {{-- ログインしていなかったらログイン画面へのリンクを表示 --}}
                             @guest
                                 <li><a class="nav-link" href="{{ route('login') }}">{{ __('messages.login') }}</a></li>
+                            {{-- ログインしていたらユーザー名とログアウトボタンを表示 --}}
                             @else
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
